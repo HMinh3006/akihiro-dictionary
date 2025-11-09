@@ -2,6 +2,7 @@
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js"; 
 import { auth, db } from './firebase-config.js';
+import { showToast } from "./toast.js";
 
 // Input elements
 const inpUsername = document.querySelector("#regUsername");
@@ -9,7 +10,6 @@ const inpEmail = document.querySelector("#regEmail");
 const inpPwd = document.querySelector("#regPassword");
 // const inpConfirmPwd = document.querySelector(".inp-cf-pw");
 const registerForm = document.querySelector("#registerForm");
-
 // Handle register
 async function handleRegister(event) {
   event.preventDefault(); // ngăn reload form
@@ -22,7 +22,7 @@ async function handleRegister(event) {
 
   // Kiểm tra input
   if (!username  || !email || !password) {
-    alert("Vui lòng điền đủ các trường");
+    showToast("Vui lòng điền đủ các trường");
     return;
   }
 
@@ -46,11 +46,11 @@ async function handleRegister(event) {
     // Lưu vào Firestore, document id = uid
     await setDoc(doc(db, "users", user.uid), userData);
 
-    alert("Đăng ký thành công!");
+    showToast("Đăng ký thành công!");
     registerForm.reset();
   } catch (error) {
     console.error("Error: ", error.message);
-    alert("Lỗi: " + error.message);
+    showToast("Lỗi: " + error.message);
   }
 }
 

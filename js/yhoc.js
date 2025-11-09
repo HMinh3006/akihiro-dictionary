@@ -1,3 +1,5 @@
+import { showToast } from "./toast.js";
+
 const vocabData = [
   { word: "apple", meaning: "quả táo", part: "noun" },
   { word: "beautiful", meaning: "xinh đẹp", part: "adjective" },

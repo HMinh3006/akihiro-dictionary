@@ -1,3 +1,5 @@
+import { showToast } from "./toast.js";
+
 // Đăng ký
 function register() {
   const user = document.getElementById("username").value.trim();

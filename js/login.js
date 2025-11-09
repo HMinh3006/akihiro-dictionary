@@ -1,17 +1,17 @@
 import { auth } from './firebase-config.js';
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import { showToast } from "./toast.js";
 
 const inpEmail = document.querySelector("#loginUsername");
 const inpPwd = document.querySelector("#loginPassword");
 const loginForm = document.querySelector("#loginForm");
-
 const handleLogin = function(event) {
     event.preventDefault();
 
     let email = inpEmail.value.trim()
     let password = inpPwd.value.trim();
     if (!email || !password){
-        alert("Vui lòng điền đầy đủ các trường dữ liệu");
+        showToast("Vui lòng điền đầy đủ các trường dữ liệu");
         return;
     }
 
@@ -27,11 +27,11 @@ const handleLogin = function(event) {
         };
 
         localStorage.setItem('user_session', JSON.stringify(userSession));
-        alert("Đăng nhập thành công!");
+        showToast("Đăng nhập thành công!");
         window.location.href = 'index.html';
     })
     .catch(e =>{
-        alert("Lỗi: " + e.message);
+        showToast("Lỗi: " + e.message);
     });
 };
 loginForm.addEventListener("submit", handleLogin);

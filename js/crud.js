@@ -10,6 +10,8 @@ import {
   updateDoc,
   deleteDoc,
 } from "./firebase-config.js";
+import { showToast } from "./toast.js";
+
 
 // ================== THÊM TỪ ================== //
 export async function addWordToFirestore(word, meaning, vietnamese, userEmail) {
@@ -21,10 +23,10 @@ export async function addWordToFirestore(word, meaning, vietnamese, userEmail) {
       user: userEmail,
       createdAt: new Date(),
     });
-    alert("Đã lưu từ vào Firestore!");
+    showToast("Đã lưu từ vào Firestore!");
   } catch (err) {
     console.error(err);
-    alert("Lỗi khi lưu vào Firestore");
+    showToast("Lỗi khi lưu vào Firestore");
   }
 }
 
@@ -59,19 +61,19 @@ export function loadWordsFromFirestore(userEmail, listElementId) {
 export async function updateWord(id, newWord) {
   try {
     await updateDoc(doc(db, "dictionary", id), { word: newWord });
-    alert("Đã cập nhật!");
+    showToast("Đã cập nhật!");
   } catch (e) {
     console.error(e);
-    alert("Lỗi khi cập nhật");
+    showToast("Lỗi khi cập nhật");
   }
 }
 
 export async function deleteWord(id) {
   try {
     await deleteDoc(doc(db, "dictionary", id));
-    alert("Đã xoá!");
+    showToast("Đã xoá!");
   } catch (e) {
     console.error(e);
-    alert("Lỗi khi xoá");
+    showToast("Lỗi khi xoá");
   }
 }
