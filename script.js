@@ -5,7 +5,6 @@ import {
   updateWord,
   deleteWord,
 } from "./crud.js";
-import { showToast } from "./toast.js";
 
 // ================== KIỂM TRA TRẠNG THÁI NGƯỜI DÙNG ================== //
 document.addEventListener("DOMContentLoaded", () => {
@@ -25,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   logoutBtn.addEventListener("click", (e) => {
     e.preventDefault();
     localStorage.removeItem("user_session");
-    showToast("Đã đăng xuất!");
+    alert("Đã đăng xuất!");
     window.location.href = "login.html";
   });
 });
@@ -33,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ================== API TRA TỪ ================== //
 async function fetchWord(word) {
   if (!word || !word.trim()) {
-    showToast("Vui lòng nhập từ cần tra!");
+    alert("Vui lòng nhập từ cần tra!");
     return null;
   }
     try {
@@ -54,7 +53,7 @@ async function fetchWord(word) {
       };
     } catch (backupError) {
       console.error("Lỗi tra từ (Datamuse):", backupError);
-      showToast("Không thể tra từ ở thời điểm này.");
+      alert("Không thể tra từ ở thời điểm này.");
       return null;
     }
   }
@@ -79,7 +78,7 @@ if (searchBtn) {
   searchBtn.addEventListener("click", async () => {
     const wordInput = document.getElementById("wordInput").value.trim();
     const resultBox = document.getElementById("resultBox");
-    if (!wordInput) return showToast("Vui lòng nhập từ cần tra!");
+    if (!wordInput) return alert("Vui lòng nhập từ cần tra!");
 
     resultBox.innerHTML = "<p>Đang tra từ...</p>";
     const wordData = await fetchWord(wordInput);

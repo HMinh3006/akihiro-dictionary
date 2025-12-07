@@ -627,4 +627,41 @@ main.dictionary-container {
 .saved-link:hover {
   background: linear-gradient(135deg, #b01eff, #7b42f6);
 }
+.toast {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #4CAF50; /* màu xanh thành công */
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+  padding: 16px;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  top: 20px;
+  font-size: 17px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: 0.5s ease-in-out;
+}
+
+/* Hiện toast */
+.toast.show {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Hiệu ứng */
+@keyframes fadein {
+  from {top: 0; opacity: 0;}
+  to {top: 20px; opacity: 1;}
+}
+
+@keyframes fadeout {
+  from {top: 20px; opacity: 1;}
+  to {top: 0; opacity: 0;}
+}
+
+
+
 

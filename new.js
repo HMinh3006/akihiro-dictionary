@@ -1,5 +1,3 @@
-import { showToast } from "./toast.js";
-
 // ================== KIỂM TRA TRẠNG THÁI NGƯỜI DÙNG ================== //
 document.addEventListener("DOMContentLoaded", () => {
   const loginBtn = document.getElementById("loginBtn");
@@ -18,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   logoutBtn.addEventListener("click", (e) => {
     e.preventDefault();
     localStorage.removeItem("user_session");
-    showToast("Đã đăng xuất!");
+    alert("Đã đăng xuất!");
     window.location.href = "login.html";
   });
 });

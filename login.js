@@ -1,17 +1,24 @@
 import { auth } from './firebase-config.js';
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import { showToast } from "./toast.js";
 
 const inpEmail = document.querySelector("#loginUsername");
 const inpPwd = document.querySelector("#loginPassword");
 const loginForm = document.querySelector("#loginForm");
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message; // đổi nội dung thông báo
+    toast.className = "toast show";
+    setTimeout(() => {
+        toast.className = toast.className.replace("show", "");
+    }, 3000); // 3 giây tự ẩn
+}
 const handleLogin = function(event) {
     event.preventDefault();
 
     let email = inpEmail.value.trim()
     let password = inpPwd.value.trim();
     if (!email || !password){
-        showToast("Vui lòng điền đầy đủ các trường dữ liệu");
+        alert("Vui lòng điền đầy đủ các trường dữ liệu");
         return;
     }
 
@@ -27,11 +34,11 @@ const handleLogin = function(event) {
         };
 
         localStorage.setItem('user_session', JSON.stringify(userSession));
-        showToast("Đăng nhập thành công!");
+        alert("Đăng nhập thành công!");
         window.location.href = 'index.html';
     })
     .catch(e =>{
-        showToast("Lỗi: " + e.message);
+        alert("Lỗi: " + e.message);
     });
 };
 loginForm.addEventListener("submit", handleLogin);
